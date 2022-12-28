@@ -1,0 +1,339 @@
+*{
+	margin:0px;
+	padding:0px;
+	list-style: none;
+	text-decoration: none;
+	font-family: "Comic Sans MS";
+	box-sizing: border-box;
+}
+h1{
+    font-size: 40px;
+    text-align: left;
+}
+
+.contenedor{
+	position:relative;
+	margin:auto;
+	width:100%;
+	height: auto;
+}
+
+.fila{
+	position:relative;
+	margin:auto;
+	width:100%;
+	height: auto;
+	clear:both;
+	display:table;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+	
+}
+
+.fila2{
+	position:relative;
+	margin:auto;
+	width:50%;
+	height: auto;
+	clear:both;
+	display:table;
+}
+
+
+
+
+
+ul {
+	
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+	justify-content: center;
+    text-align: center;
+}
+
+li {
+    display: inline;
+    float: left;
+	
+}
+
+li a {
+	justify-content: center;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+	margin: 0 auto;
+}
+
+
+li a:hover {
+    background-color: #4CAF50;
+}
+
+
+#seccion3 center{
+	padding:20px;
+}
+
+#seccion3 img{	
+	border-radius:100%;
+	width:200px;
+	height:200px;
+	padding:10px;
+}
+
+#seccion3 h1{
+	
+	font-size:40px;
+	padding:10px;
+}
+
+#seccion3 p{
+	padding:10px;
+}
+
+#seccion4 aside ul li{
+	
+	background:#aaa;
+	padding:10px;
+	margin:2px 10px;
+	list-style:square;
+	list-style-position:inside;
+	
+
+}
+
+.formularios{
+	float:center;
+	/*border:1px solid black;*/
+	padding:5px;
+	margin:20px;
+}
+
+#seccion4 article h1{
+	
+	font-size:40px;
+	margin:20px;
+}
+
+#seccion4 article p img{
+	float:left;
+	margin-right:20px;
+}
+
+#seccion4 article p {
+	margin:5px 20px;
+	font-size:14px;
+	text-align:justify;
+}
+
+#seccion4 aside#der h1{
+	line-height:50px;
+	text-align:center;
+	background:#4CAF50;
+	color:white;
+	margin-bottom:5px;
+}
+
+#seccion4 aside#der input{
+	width:100%;
+	padding:10px;
+	margin:5px 0;
+}
+#seccion4 aside#der button{
+	width:100%;
+	padding:10px;
+	margin:5px 0;
+}
+
+#seccion4 aside#der input[type="text"]{
+	
+	background-repeat:no-repeat;
+	background-position:right;
+	background-size:contain;
+}
+	
+#seccion4 aside#der input[type="password"]{
+	
+	background-repeat:no-repeat;
+	background-position:right;
+	background-size:contain;
+}
+
+#seccion4 aside#der button{
+	background:black;
+	color:white;
+	border:0;
+}
+
+.hidden{
+display: none;
+}
+
+
+#seccion4 aside#der button{
+    display: block;
+}
+
+h2{
+	font-size:large;
+
+}
+.tabla1{
+	border: 3px;
+	text-align: center;
+	margin: 0 auto;
+
+}
+td{
+	
+	text-align: center;
+	border: 3px;
+	padding: 5px;
+ }
+
+.contenedor-btn-file input[type="file"] {
+    appearance: none;
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    z-index: -1;
+    width: 100px;
+}
+.contenedor-btn-file {
+    display: inline-block;
+    position: relative;
+    background-color: black;
+    color: #fff;
+    border: 0;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, .15);
+    overflow: hidden;
+    transition: ease-out 120ms background-color;
+    
+}
+.contenedor-btn-file:hover {
+    background-color: #4CAF50;
+}
+.contenedor-btn-file:active {
+    background-color: #4CAF50;
+}
+.contenedor-btn-file > i {
+    margin-right: 15px;
+}
+
+.contenedor-btn-file label {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    
+}
+.container{
+    width:1300px;
+    height:1000px;
+    margin:0 auto;
+}
+.one{
+    width:1100px;
+    height:400px;
+    margin:100px auto;
+}
+.one-center{
+    width:800px;
+    height:500px;
+    float:left;
+    margin-right:100px auto;
+}
+.one-left{
+    width:200px;
+    height:300px;
+    float:left;
+}
+.one-right{
+    width: 50px;
+    height:150px;
+    float:right;
+    
+}
+.btn-g{
+    width:100px;
+    height:50px;
+    background-color:#4CAF50;
+    border:none;
+
+}
+
+button:hover{
+    background-color:black;
+    color: #fff;
+}
+
+
+#CerrarSesionCliente{
+    margin:50px;
+    
+    float:right
+    
+
+}
+#VistaAC{
+    margin:50px;    
+    float:right
+
+}
+
+h4{
+    font-size: large;
+    background-color: #FF5733 ;
+}
+
+#table_peliculas{
+   float: center;
+
+}
+
+#tabla_categorias{
+	text-align: center;
+
+
+}
+#tblCategorias{
+	margin: 0 auto;
+
+
+}
+
+#cate2{
+	width: 400;
+	height: 400;
+	overflow: auto;
+
+}
+h5{
+	font-size: large;
+    background-color: #FFC300 ;
+	text-align: center;
+
+}
+.cambio{
+	background-color: red;
+
+}
+#temporizador{
+
+	text-align: center;
+	font-size: large;
+	background-color: #FFC300;
+}
+
