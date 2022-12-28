@@ -4,9 +4,227 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOVIE CATS</title>
+    <title>Proyecto 2</title>
+    <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
-    <h2>Proyecto 2</h2>
+    <nav class="fila">
+		
+		<ul>
+			<li class="barranav" onclick="MostrarLog()"><a href="#">Login</a></li>
+			<li class="barranav"><a href="#">Botón 2</a></li>
+			<li class="barranav"><a href="#">Botón 3</a></li>
+			<li class="barranav" onclick="MostrarCategorias()"><a href="#">Categorias</a></li>
+			<li class="barranav" onclick="MostrarActores()"><a href="#">Actores</a></li>
+			
+		</ul>
+
+	</nav>
+
+    <div><h1>MovieCats</h1></div>
+    <section id="seccion4" class="fila2">
+        
+        <aside id="der" class="formularios">
+    <div id="Login" >
+        <h1>Login</h1>
+        
+        <form>
+    
+            <input type="text" placeholder="Usuario" id="txtuser">
+        
+            <input type="password" placeholder="Contraseña" id="txtpassword">
+           <label for="cbox1">Administrador</label><input type="checkbox" id="cbox1">
+           <button type="button" id="btnIngresar" ><b>Ingresar</b></button>
+
+        </form></div>
+    </aside>
+        </section>
+
+    <!-- Botones de Carga Masiva-->
+<div id="paneladmin" class="hidden">
+
+	<h1>Panel Administrador</h1>
+	<button id="cerrar" onclick="LimpiarLogin()">Cerrar Sesion</button>
+<table class="tabla1">
+
+	<tr>
+  
+	  <td><h2>Carga de Peliculas:</h2></td>
+  
+	  <td><h2>Carga de Clientes:</h2></td>
+  
+	  <td><h2>Carga de Actores:</h2></td>
+      <td><h2>Carga de Categorias:</h2></td>
+  
+	</tr>
+  
+	<tr>
+
+		<td><button class="contenedor-btn-file">
+			<i ></i>
+			Adjuntar archivo Peliculas
+			<label for="btn-file"></label>
+			<input type="file" id="btn-file"/>
+		</button></td>
+  
+	  <td><button class="contenedor-btn-file">
+		<i ></i>
+		Adjuntar archivo Clientes
+		<label for="btn-clientes"></label>
+		<input type="file" id="btn-clientes"/>
+	</button></td>
+  
+	  <td><button class="contenedor-btn-file">
+		<i ></i>
+		Adjuntar archivo Actores
+		<label for="btn-actores"></label>
+		<input type="file" id="btn-actores"/>
+		
+	</button></td>
+
+    <td><button class="contenedor-btn-file">
+		<i ></i>
+		Adjuntar archivo Categorias
+		<label for="btn-categorias"></label>
+		<input type="file" id="btn-categorias"/>
+		
+	</button></td>
+  
+	</tr>
+  
+  </table>
+</div>
+<div id="grafoss" class="hidden">
+<div class="container" id="grafos">
+    <div class="one">
+      <div class="one-left">
+        <button id="bPeliculas" class="btn-g"><b>Grafo Peliculas</b></button><br>
+        <button id="bClientes"class="btn-g"><b>Grafo Clientes</b></button><br>
+        <button id="bactores"class="btn-g"><b>Grafo Actores</b></button><br>
+        <button id="bcategorias"class="btn-g"><b>Grafo Categorias</b></button><br>
+      </div>
+      <div class="one-center">
+        <canvas width="1000" height="800" style="display:none;"> </canvas>
+        <ul>
+         
+          <li style="display:none" id="a"><div id="arbolAVL"></div></li>
+          <li style="display:none" id="b"><div id="listaclientes"> </div></li>
+          <li style="display:none" id="c"><div id="arbolactores"> </div></li>
+          <li style="display:none" id="d"><div id="graflistacategorias"></div></li>
+          <li style="display:block" id="e"><img src="images/5.png" width="800" height="400"></li>
+        </ul>
+       
+      </div>
+      <div class="one-right">
+        <button id="descargar"class="btn-g"><b>Descargar Grafo</b></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="blockchain" class="hidden">
+  <div id="temporizador">
+    <h5>120</h5>
+  </div>
+  <input type="number" id="txtnumerob">
+  <button type="button" id="btnmodti"><b>Modificar Tiempo</b></button>
+  <button type="button" id="btngenerarBlock"><b>Generar Bloque ahora</b></button>
+  <button type="button" id="btngrafmerk"><b>Graficar Merkle</b></button>
+
+  <div id="grafblock"></div>
+  <div id="Merkle"></div>
+</div>
+
+
+
+
+
+<!-- Panel Usuario-->
+<div id="CerrarSesionCliente" class ="hidden"><button type="button" id="btnCSC" onclick="CSCliente()"><b>Cerrar Sesión</b></button></div>
+<div id="OrdenarPelis" class ="hidden">
+    <h2>Panel Usuario</h2>
+    <button type="button" id="btnOA" onclick="OA()"><b>Orden Ascendente</b></button>
+    <button type="button" id="btnOD" onclick="OD()"><b>Orden Descendente</b></button>
+</div>
+
+<div id="VistaAC" class ="hidden">
+
+    <button type="button" id="btnVA" onclick="VerACtores()"><b>Ver Actores</b></button>
+    <button type="button" id="btnVC" onclick="VerCategorias()"><b>Ver Categorias</b></button>
+</div>
+
+<div id="table_peliculas" class="hidden">
+    <table id="tblpeliculas" border="1" align="center">
+        
+        <tbody id="rellenadotablapeliculas"></tbody>
+    </table>
+</div>
+
+<!-- Tabla vista Actores-->	
+<div id="tabla_actores" class="hidden">
+    
+  <button id="Inorden" onclick="In()">In Orden</button>
+  <button id="PreOrden" onclick="Pre()">Pre Orden</button>
+  <button id="PostOrden" onclick="Post()">Post Orden</button>
+  <table id="tblActores" border="1">
+      
+      <tbody id="rellenadotablactores"></tbody>
+  </table>
+</div>
+
+<!-- Tabla vista Categorias-->	
+<div id="tabla_categorias" class="hidden">
+<div id="cate2"></div>
+<!--<table id="tblCategorias" border="1" class="tblcat">
+    
+    <tbody id="rellenadotablacats"></tbody>
+</table>-->	
+</div>
+
+
+
+
+<div id="Pelicula" class="hidden">
+  <button id="ocultar" onclick="OcultarPeli()">Regresar</button>
+  <table id="tblpelis" border="1" class="tblcat">
+    
+    <tbody id="rellenadotablapel"></tbody>
+
+    
+    
+    
+</table>
+<input type="number" placeholder="Puntuacion" id="txtpuntos">
+    <button onclick="CambiarP()">Modificar</button>
+    
+    <ul> 
+      <li style="display:none" id="e1"><img src="images/e1.jpg" width="130" height="50"></li>
+      <li style="display:none" id="e2"><img src="images/e2.jpg" width="130" height="50"></li>
+      <li style="display:none" id="e3"><img src="images/e3.jpg" width="130" height="50"></li>
+      <li style="display:none" id="e4"><img src="images/e4.jpg" width="130" height="50"></li>
+      <li style="display:none" id="e5"><img src="images/e5.jpg" width="140" height="50"></li>
+    </ul>
+
+    <div id="coment"></div>
+    <div>
+      <input type="text" placeholder="Ingrese su comentario" id="txtcomentario">
+      <button id="btnpublicar" onclick="GuardarComentario()">Publicar</button>
+    </div>
+
+</div>
+
+
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>   
+	<script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
+    <script src="https://superal.github.io/canvas2image/canvas2image.js "></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    
+    <script src="js/filesaver.js"></script>
+    <script src="funciones.js"></script>
+    
 </body>
 </html>
