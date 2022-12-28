@@ -1,3 +1,425 @@
+var userp = "";
+var nombre_user = "";
+var titulop = "";
+var descripcionp = "";
+var puntuacionp = 0;
+var preciop = 0
+var id_id = 0;
+
+
+
+
+function MostrarActores(){
+
+    mostrar('tabla_actores')
+    Ocultar('Login')
+    Ocultar('tabla_categorias')
+    
+}
+
+function MostrarCategorias(){
+    Ocultar('tabla_actores')
+    Ocultar('Login')
+    mostrar('tabla_categorias')
+
+}
+
+
+
+document.querySelector('#btnIngresar').addEventListener('click', iniciarSesion);
+function iniciarSesion(){
+    
+    var user = '';
+    var password = '';
+    var checkbox = false
+    var accesol = false;
+
+    user = document.querySelector('#txtuser').value;
+    password = document.querySelector('#txtpassword').value;
+    checkbox = document.querySelector('#cbox1').checked;
+    accesol = validarusuario(user,password);
+    if(validarusuario(user,password) == true && checkbox == true){
+    console.log("Ingreso Correcto");
+    mostrarOcultar('Login');
+    mostrarOcultar('paneladmin');
+    mostrarOcultar('grafoss');
+    mostrarOcultar('blockchain')
+    
+
+    }else if(validarusuario(user,password) == true){
+        console.log("Ingreso")
+        Ocultar('Login')
+        mostrar('CerrarSesionCliente')
+        mostrar('OrdenarPelis')
+        mostrar('VistaAC')
+        mostrar('table_peliculas')
+        userp = user;
+    }
+   
+    
+    
+
+}
+
+function validarusuario(pUser, pPass){
+
+    var user = "EDD"
+    var password = 123
+    var Acceso = false;
+    if(pUser == user && pPass == password){
+        Acceso = true;
+
+        return Acceso;
+      
+     } else if(ListaClientes.EstaVacia() != true && ListaClientes.BuscarCliente(pUser,pPass) == true){
+        Acceso = true;
+        return Acceso;
+
+
+    }       
+      else{
+        console.log("Usuario y/o Contraseña Incorrectos")
+        alert("Usuario y/o Contraseña Incorrectos");
+    }
+
+    }
+
+
+function mostrar(id){
+    if(document.getElementById(id).style.display == 'none'){
+
+        document.getElementById(id).style.display = 'block';
+        
+
+    }else{
+
+        document.getElementById(id).style.display = 'block';
+        
+    }
+}
+
+function Ocultar(id){
+    if(document.getElementById(id).style.display == 'block'){
+
+        document.getElementById(id).style.display = 'none';
+        
+
+    }else{
+
+        document.getElementById(id).style.display = 'none';
+        
+    }
+}
+
+const mostrar2 = (elemento) => {
+    elemento.style.display = 'block';
+}
+const ocultar2 = (elemento) => {
+    elemento.style.display = 'none';
+}
+function mostrarOcultar(id){
+    let div = document.getElementById(id);
+    if( window.getComputedStyle(div).display !== 'none' ){
+      ocultar2(div);
+      return false;
+    }
+
+    mostrar2(div);
+}
+
+
+
+var a=document.getElementById("a");
+  var b=document.getElementById("b");
+  var c=document.getElementById("c");
+  var d=document.getElementById("d");
+  var e=document.getElementById("e");
+  var b1=document.getElementById("bPeliculas");
+  var b2=document.getElementById("bClientes");
+  var b3=document.getElementById("bactores");
+  var b4=document.getElementById("bcategorias");
+  b1.onclick=function(){
+    
+    a.style.display="block";
+    b.style.display="none";
+    c.style.display="none";
+    d.style.display="none";
+    e.style.display="none";
+    document.getElementById('descargar').onclick=function(){
+        DGrafo("arbolAVL") 
+
+    }
+    
+    
+  }
+   b2.onclick=function(){
+    
+    a.style.display="none";
+    b.style.display="block";
+    c.style.display="none";
+    d.style.display="none";
+    e.style.display="none";
+    document.getElementById('descargar').onclick=function(){
+        DGrafo("listaclientes") 
+
+    }
+
+    
+           
+  }
+  b3.onclick=function(){
+    a.style.display="none";
+          b.style.display="none";
+          c.style.display="block";
+          d.style.display="none";
+          e.style.display="none";
+          document.getElementById('descargar').onclick=function(){
+            DGrafo("arbolactores") 
+    
+        }
+           
+  }
+  b4.onclick=function(){
+    a.style.display="none";
+    b.style.display="none";
+    c.style.display="none";
+    d.style.display="block";
+    e.style.display="none";
+    document.getElementById('descargar').onclick=function(){
+        DGrafo("graflistacategorias") 
+
+    }
+           
+  }
+
+  var aa=document.getElementById("e1");
+  var ba=document.getElementById("e2");
+  var ca=document.getElementById("e3");
+  var da=document.getElementById("e4");
+  var ea=document.getElementById("e5");
+  
+  function CambiarP(){
+    
+    var punteo = document.querySelector('#txtpuntos').value;
+    
+
+
+    if(punteo == 1){
+        aa.style.display="block";
+        ba.style.display="none";
+        ca.style.display="none";
+        da.style.display="none";
+        ea.style.display="none";
+
+
+    }else if(punteo == 2){
+        aa.style.display="none";
+        ba.style.display="block";
+        ca.style.display="none";
+        da.style.display="none";
+        ea.style.display="none";
+    
+    }else if(punteo == 3){
+        aa.style.display="none";
+        ba.style.display="none";
+        ca.style.display="block";
+        da.style.display="none";
+        ea.style.display="none";
+    
+    }else if(punteo == 4){
+        aa.style.display="none";
+        ba.style.display="none";
+        ca.style.display="none";
+        da.style.display="block";
+        ea.style.display="none";
+    
+    }else if(punteo == 5){
+        aa.style.display="none";
+        ba.style.display="none";
+        ca.style.display="none";
+        da.style.display="none";
+        ea.style.display="block";
+    
+    }else{
+        alert("Solo se puede calificar de 1-5")
+    }
+
+    console.log(id_id)
+    ArbolAVL.ModificarPunteo(id_id,ArbolAVL.raiz,punteo)
+    ArbolAVL.inorden()
+    
+    document.querySelector('#txtpuntos').value = "";
+
+
+
+    
+
+    
+
+
+  }
+  function MostrarP(punteo){
+    if(punteo == 1){
+        aa.style.display="block";
+        ba.style.display="none";
+        ca.style.display="none";
+        da.style.display="none";
+        ea.style.display="none";
+
+
+    }else if(punteo == 2){
+        aa.style.display="none";
+        ba.style.display="block";
+        ca.style.display="none";
+        da.style.display="none";
+        ea.style.display="none";
+    
+    }else if(punteo == 3){
+        aa.style.display="none";
+        ba.style.display="none";
+        ca.style.display="block";
+        da.style.display="none";
+        ea.style.display="none";
+    
+    }else if(punteo == 4){
+        aa.style.display="none";
+        ba.style.display="none";
+        ca.style.display="none";
+        da.style.display="block";
+        ea.style.display="none";
+    
+    }else if(punteo == 5){
+        aa.style.display="none";
+        ba.style.display="none";
+        ca.style.display="none";
+        da.style.display="none";
+        ea.style.display="block";
+    
+    }else{
+       
+    }
+}
+
+  //Lectura de Archivos
+  document.querySelector('#btn-clientes').addEventListener('change', LeerClientes);
+
+  function LeerClientes(e) {
+    var archivo = e.target.files[0];
+    if (!archivo) {
+      return;
+    }
+    var lector = new FileReader();
+    lector.onload = function(e) {
+    var contenido = e.target.result;
+    let intern = JSON.parse(contenido); // parsear json 
+      for(let item of intern) {
+        ListaClientes.InsertarCliente(item.dpi,item.nombre_completo,item.nombre_usuario,item.correo,item.contrasenia,item.telefono)
+    
+
+   }
+   ListaClientes.GraficarLista();
+   
+   
+  
+    };
+    
+    lector.readAsText(archivo);
+    
+  }
+
+  document.querySelector('#btn-actores').addEventListener('change', LeerActores);
+  function LeerActores(e) {
+    var archivo = e.target.files[0];
+    if (!archivo) {
+      return;
+    }
+    var lector = new FileReader();
+    lector.onload = function(e) {
+    var contenido = e.target.result;
+    let intern = JSON.parse(contenido); // parsear json 
+      for(let item of intern) {
+        Arbol.InsertarActor(item.dni,item.nombre_actor,item.correo,item.descripcion)
+
+   }
+
+   console.log(Arbol.PreOrden())
+  Arbol.GraficoArbol2();
+  Arbol.CrearTablaActores_PreOrden()
+   
+   
+  
+    };
+    
+    lector.readAsText(archivo);
+    
+  }
+
+  document.querySelector('#btn-file').addEventListener('change', LeerPeliculas);
+
+function LeerPeliculas(e){
+    var archivo = e.target.files[0];
+    if (!archivo) {
+      return;
+    }
+    var lector = new FileReader();
+    lector.onload = function(e) {
+    var contenido = e.target.result;
+    let intern = JSON.parse(contenido);
+      for(let item of intern) {
+        ArbolAVL.InsertarPelicula(item.id_pelicula,item.nombre_pelicula,item.descripcion,item.puntuacion_star,item.precio_Q)
+        
+   }
+
+   //console.log(ArbolAVL.preorden())
+   ArbolAVL.GraficarArbolAVL()
+   ArbolAVL.CrearTablaPeliculas();
+   ArbolAVL.preorden();
+   ListaComentarios.MostrarUsers();
+   
+  
+   
+   
+  
+    };
+    
+    lector.readAsText(archivo);
+
+
+}
+
+document.querySelector('#btn-categorias').addEventListener('change', LeerCategorias);
+function LeerCategorias(e){
+    var archivo = e.target.files[0];
+    if (!archivo) {
+      return;
+    }
+    var lector = new FileReader();
+    lector.onload = function(e) {
+    var contenido = e.target.result;
+    let intern = JSON.parse(contenido); // parsear json 
+      for(let item of intern) {
+        Listap.InsertarCliente(item.id_categoria,item.company)
+   }
+   Listap.MostrarLista()
+   TablaHashh.GraficarListadeListas()
+   //TablaHashh.VerCats()
+   TablaHashh.GraficarCategorias()
+   
+   
+  
+   
+   
+  
+    };
+    
+    lector.readAsText(archivo);
+
+
+}
+  
+
+
+
 class NodoLS{
     constructor(dpi,nombre_completo,nombre_usuario,correo,contrasenia,telefono){
         
