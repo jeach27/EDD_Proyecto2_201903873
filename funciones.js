@@ -1,3 +1,4 @@
+
 var userp = "";
 var nombre_user = "";
 var titulop = "";
@@ -418,9 +419,7 @@ function LeerCategorias(e){
 }
   
 
-
-
-class NodoLS{
+  class NodoLS{
     constructor(dpi,nombre_completo,nombre_usuario,correo,contrasenia,telefono){
         
        this.dpi = dpi
@@ -1967,6 +1966,20 @@ class ListadeListas2{
     }
 }
 
+
+/*var ll = new ListadeListas2()
+ll.InsertarPeli("buenas")
+ll.InsertarPeli("buenas2")
+ll.InsertarPeli("buenas3")
+ll.InsertarPeli("buenas4")
+
+ll.InsertarComentario("buenas","Jorge","Muy buena pelicula, pero le falto mas accion")
+ll.InsertarComentario("buenas","Mario","no me gusto")
+ll.InsertarComentario("buenas2","ppee","Muy buena ")
+ll.InsertarComentario("buenas2","ddd"," buena pelicula")
+ll.InsertarComentario("buenas","ddd","no tanto pelicula")
+
+ll.GraficarListadeListas("buenas")*/
 var Sha256 = {};
 Sha256.hash = function(msg, utf8encode) {
     utf8encode =  (typeof utf8encode == 'undefined') ? true : utf8encode;
@@ -2126,3 +2139,511 @@ Utf8.decode = function(strUtf) {
     );
   return strUni;
 } 
+
+class Nodo1{
+    constructor(dato){
+    this.dato = dato
+    this.siguiente = null
+    this.anterior = null
+
+    }
+
+}
+
+class ListaM{
+
+    constructor(){
+        this.inicio = null
+        this.final = null
+        this.tamanio = 0
+    }
+
+    Insertar(nuevo){
+        if(this.inicio == null){
+
+            this.inicio = this.final = nuevo
+        }else{
+            nuevo.siguiente = this.inicio 
+            this.inicio.anterior = nuevo
+            this.inicio = nuevo
+        }
+        this.tamanio++;
+
+    }
+}
+
+class NodoHash{
+    constructor(hash){
+        this.hash = hash
+        this.left = null
+        this.right = null
+
+
+    }
+}
+
+class Arbol_Merkle{
+
+    constructor(){
+        this.raiz = null
+        this.temporal = null
+        this.lista = new ListaM()
+
+    }
+
+    RetornarRaiz(){
+        var l = this.raiz.hash
+        return l
+    }
+
+    InsertarDatos(data){
+
+        this.lista.Insertar(data);
+    }
+
+    Crear(dat){
+        this.raiz = new NodoHash(0)
+        this.creara(this.raiz,dat)
+
+
+    }
+    creara(aux,dat){
+        if(dat > 0){
+            aux.left = new NodoHash(0)
+            aux.right = new NodoHash(0)
+            this.creara(aux.left,dat-1)
+            this.creara(aux.right,dat-1)
+
+        }
+
+
+    }
+
+    CodigoHash(recorrer){
+    if(recorrer != null){
+        this.CodigoHash(recorrer.left)
+        this.CodigoHash(recorrer.right)
+
+        if(recorrer.left == null && recorrer.right == null){
+            recorrer.left = this.temporal
+            this.temporal = this.temporal.anterior
+            recorrer.hash = Sha256.hash((recorrer.left.dato*1000).toString())
+        }else{
+            recorrer.hash = Sha256.hash(Sha256.hash(recorrer.left.hash.toString())+Sha256.hash(recorrer.right.hash.toString()))
+
+
+        }
+
+    }   
+
+    }
+
+    ExpA(){
+
+        var ex = 1
+
+        while (Math.pow(2, ex) < this.lista.tamanio) {
+            ex += 1
+          }
+          for (var i = this.lista.tamanio; i < Math.pow(2, ex); i++) {
+            this.lista.Insertar(new Nodo1(i*100))
+          }
+          this.temporal = this.lista.final
+          this.Crear(ex)
+          this.CodigoHash(this.raiz)
+         
+    }
+
+    Graficar(){
+        this.codigodot = "digraph G{\n";
+        this.preorder(this.raiz, null)
+        this.codigodot += "}"
+
+        console.log(this.codigodot)
+        d3.select("#Merkle").graphviz().renderDot(this.codigodot)
+        this.codigodot = "";
+
+    }
+
+    preorder(aux,atras){
+
+        if(aux!= null){
+            if(aux instanceof NodoHash){
+
+                this.codigodot += "nodo"+aux.hash+"[label =\"" +aux.hash + "\"]\n";
+                if(atras != null){
+
+                    this.codigodot += "nodo"+atras.hash+"->nodo"+aux.hash+"\n";
+                }
+            }else{
+                var temp = Sha256.hash(aux.dato.toString())
+                this.codigodot += "nodo"+temp+"[label=\"" +aux.dato+"\"]\n";
+                if(atras != null){
+                    this.codigodot += "nodo"+atras.hash+"->nodo"+temp+"\n";
+
+                }
+            }
+            this.preorder(aux.left,aux)
+            this.preorder(aux.right,aux)
+
+        }
+    }
+
+
+}
+
+var merk = new Arbol_Merkle()
+merk.InsertarDatos(new Nodo1(4))
+merk.InsertarDatos(new Nodo1(6))
+merk.InsertarDatos(new Nodo1(5))
+merk.InsertarDatos(new Nodo1(3))
+merk.InsertarDatos(new Nodo1(2))
+
+merk.ExpA()
+
+//merk.Graficar()
+
+
+function VerACtores(){
+    mostrarOcultar('tabla_actores')
+    mostrarOcultar('table_peliculas')
+    mostrarOcultar('OrdenarPelis')
+    Ocultar('Login')
+    Ocultar('tabla_categorias')
+
+
+}
+function VerCategorias(){
+
+    mostrarOcultar('tabla_categorias')
+    Ocultar('Login')
+    Ocultar('tabla_actores')
+    mostrarOcultar('table_peliculas')
+    mostrarOcultar('OrdenarPelis')
+
+
+}
+function OcultarPeli(){
+
+    
+    Ocultar('Pelicula')
+    mostrar('OrdenarPelis')
+    mostrar('VistaAC')
+    mostrar('table_peliculas')
+}
+
+function GuardarComentario(){
+    var coment = document.getElementById("txtcomentario").value
+    ListaComentarios.InsertarComentario(titulop,userp,coment);
+    ListaComentarios.GraficarListadeListas(titulop)
+    mostrar('coment')
+    document.getElementById("txtcomentario").value = "";
+    
+}
+
+
+function MostrarLog(){
+
+    Ocultar('tabla_actores')
+    mostrar('Login')
+    Ocultar('tabla_categorias')
+}
+
+function LimpiarLogin(){
+    document.getElementById("txtuser").value = "";
+    document.getElementById("txtpassword").value = "";
+    document.querySelector('#cbox1').checked = false;
+    
+    Ocultar('paneladmin')
+    mostrar('Login')
+    Ocultar('grafoss')
+    Ocultar('blockchain')
+    
+}
+
+function CSCliente(){
+    document.getElementById("txtuser").value = "";
+    document.getElementById("txtpassword").value = "";
+    document.querySelector('#cbox1').checked = false;
+    userp = "";
+    nombre_user = "";
+
+    mostrar('Login')
+    Ocultar('CerrarSesionCliente')
+    Ocultar('OrdenarPelis')
+    Ocultar('VistaAC')
+    Ocultar('table_peliculas')
+
+
+
+
+}
+function Pre(){
+    Arbol.rellenadotabla.innerHTML = "";
+    Arbol.CrearTablaActores_PreOrden()
+} 
+function In(){
+    Arbol.rellenadotabla.innerHTML = "";
+    Arbol.CrearTablaActores_InOrden()
+
+}
+function Post(){
+    Arbol.rellenadotabla.innerHTML = "";
+    Arbol.CrearTablaActores_PostOrden()
+
+}
+
+
+
+
+  d3.select("#descargar4").on("click", function () {
+   
+
+    var html = d3.select("svg")
+        .attr("xmlns", "http://www.w3.org/2000/svg")
+        .node().parentNode.innerHTML;
+
+        var DOMURL = self.URL || self.webkitURL || self;
+        var svg = new Blob([html], {type: "image/svg+xml;charset=utf-8"});
+        var url = DOMURL.createObjectURL(svg);
+        
+        var image = new Image;
+        image.src = url;
+
+        var canvas = document.querySelector("canvas");
+        var context = canvas.getContext("2d");
+    
+
+    image.onload = function () {
+        context.drawImage(image, 0, 0);
+        DOMURL.revokeObjectURL(url);
+        var canvasdata = canvas.toDataURL("image/png");
+        var a = document.createElement("a");
+        a.download = "grafo.png";
+        a.href = canvasdata;
+        a.click();
+        
+        
+    };
+
+    canvasdata = "";
+    
+}); 
+
+function DGrafo(id_div) {
+    html2canvas($('#' + id_div)[0]).then(function (canvas) {
+        
+        return Canvas2Image.saveAsPNG(canvas);
+        //$(".response").append(canvas);
+    });
+}
+
+
+class Temporizador{
+
+    constructor(id, inicio, final){
+        this.id = id;
+        this.inicio = inicio;
+        this.final = final;
+        this.contador = this.inicio;
+
+    }
+
+   
+
+    conteoSegundos = function(){
+      if (this.contador == this.final){
+        this.conteoSegundos = null;
+        return;
+      }
+
+      document.getElementById(this.id).innerHTML = this.contador--;
+      setTimeout(this.conteoSegundos.bind(this), 1000);
+    };
+  }
+
+  let temporizador = new Temporizador('temporizador', 300, -1);
+  temporizador.conteoSegundos();
+
+  document.querySelector('#btnmodti').addEventListener('click', ModificarT); 
+  document.querySelector('#btngrafmerk').addEventListener('click', GrafMerk); 
+
+  function GrafMerk(){
+    Merklee.ExpA()
+    Merklee.Graficar()
+
+  }
+
+  function ModificarT(){
+
+    var s = document.querySelector('#txtnumerob').value;
+    temporizador.conteoSegundos = null;
+    temporizador = new Temporizador('temporizador', s, -1);
+    temporizador.conteoSegundos();
+
+    document.querySelector('#txtnumerob').value = "";
+
+  }
+
+class Nodo_Bloque{
+
+    constructor(index,data,previus = ""){
+        this.index = index
+        this.data = data
+        this.timestamp = this.CrearFecha()
+        this.previus = previus
+        this.hash =  this.CrearHash();
+        this.nonce = 0
+
+
+    }
+
+    PruebaTrabajo(dificultad){
+        while(this.hash.substring(0,dificultad) !== Array(dificultad+1).join("0")){
+            this.nonce++;
+            this.hash = this.CrearHash();
+        }
+        return this.hash;
+
+    }
+
+    CrearHash(){
+
+        return Sha256.hash(this.index+this.timestamp + this.previus+this.nonce).toString()
+    }
+
+    CrearFecha(){
+        	
+        var hoy = new Date();
+        var fecha = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();
+        var hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
+        var fechaYHora = fecha + ' ' + hora;
+
+        return fechaYHora;
+
+    }
+}
+class ListaBlock{
+    constructor(){
+
+        this.cabeza = null
+        this.tamanio = 0;
+    }
+
+    InsertarCliente(index,data,previus){
+        var nuevo = new Nodo_Bloque(index,data,previus)
+        
+        if(this.cabeza == null){
+            this.cabeza = nuevo;
+            this.tamanio++;
+        }else{
+            var aux = this.cabeza
+            while(aux.siguiente != null){
+                aux = aux.siguiente
+
+
+            }
+            aux.siguiente = nuevo
+            this.tamanio++;
+
+        }
+
+
+    }
+
+    
+
+    
+    GraficarLista(){
+        var codigodot = "digraph G{\n\nnode [shape=box];\ngraph [pad="+'"'+0.2+'"'+", nodesep="+'"'+0.5+'"'+"];\n";
+            var temporal = this.cabeza
+            var conexiones ="";
+            var nodos ="";
+            var numnodo= 0;
+            
+            while(temporal != null){
+
+                    
+                
+                    if(temporal.siguiente == null){
+                   
+                        nodos+=  "N" + numnodo + "[label=\"" +"Bloque "+ temporal.index + "\n"
+                                                            +"Hash: "+temporal.hash + "\n"
+                                                            +"Previus: "+ temporal.previus + "\n"
+                                                            +"Root Merkle: "+ Merklee.RetornarRaiz() + "\n"
+                                                            +"Transacciones: "+ temporal.data + "\n"
+                                                            +"Fecha:"+ temporal.timestamp + "\" ];\n"
+                                                            
+                        var auxnum = numnodo+1
+                        //conexiones += "N" + numnodo + " -> N" + 0 + ";\n"
+    
+                    }else{
+                        nodos+=  "N" + numnodo + "[label=\"" +"Bloque "+ temporal.index + "\n"
+                        +"Hash: "+temporal.hash 
+                        +"Previus "+ temporal.previus + "\n"
+                        +"Root Merkle "+ "temporal.index" + "\n"
+                        +"Transacciones "+ temporal.data + "\n"
+                        +"Fecha "+ temporal.timestamp +"\" ];\n"               
+                    var auxnum = numnodo+1
+                    conexiones += "N" + numnodo + " -> N" + auxnum + ";\n"
+                
+                    }
+                    
+                temporal = temporal.siguiente
+                numnodo++; 
+                
+            }
+                
+            
+            codigodot += "//agregando nodos\n"
+            codigodot += nodos+"\n"
+            codigodot += "//agregando conexiones o flechas\n"
+            codigodot += "{rank=same;\n"+conexiones+"\n}\n}"
+
+            console.log(codigodot)
+            
+           
+            d3.select('#grafblock').graphviz()
+                .width(800)
+                .height(300)
+                .renderDot(codigodot)
+            
+
+
+    }
+
+
+}
+
+document.querySelector('#btngenerarBlock').addEventListener('click', Bloquee); 
+
+function Bloquee(){
+
+    ll.InsertarCliente(0,"")
+    ll.GraficarLista()
+}
+
+
+var blo = new Nodo_Bloque(0,'prueba')
+console.log(JSON.stringify(blo,null,2));
+
+    
+// Inializacion de Estructuras
+
+var ListaClientes = new ListaSimpleClientes();
+var Arbol = new Arbol_ABB();
+var ArbolAVL = new Arbol_AVL();
+var TablaHashh = new TablaHash();
+var Listap = new ListaSimpleP();
+var ListaComentarios = new ListadeListas2()
+var Merklee = new Arbol_Merkle()
+var ll = new ListaBlock()
+
+for(var i = 0; i <20; i++){
+    TablaHashh.Insertar(i)
+
+
+}
+/*var hola = Sha256.hash("Hola123")
+
+console.log(hola)*/
