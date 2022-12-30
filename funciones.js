@@ -2589,9 +2589,9 @@ class ListaBlock{
                     conexiones += "N" + numnodo + " -> N" + auxnum + ";\n"
                 
                     }
-                    
+                numnodo++;    
                 temporal = temporal.siguiente
-                numnodo++; 
+                 
                 
             }
                 
