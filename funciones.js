@@ -65,7 +65,7 @@ function iniciarSesion(){
 function validarusuario(pUser, pPass){
 
     var user = "EDD"
-    var password = 123
+    var password = 12345678
     var Acceso = false;
     if(pUser == user && pPass == password){
         Acceso = true;
@@ -313,6 +313,7 @@ var a=document.getElementById("a");
     lector.onload = function(e) {
     var contenido = e.target.result;
     let intern = JSON.parse(contenido); // parsear json 
+    ListaClientes.InsertarCliente("2354168452525", "Oscar Armin", "EDD", null, "12345678", " 12345678");
       for(let item of intern) {
         ListaClientes.InsertarCliente(item.dpi,item.nombre_completo,item.nombre_usuario,item.correo,item.contrasenia,item.telefono)
     
